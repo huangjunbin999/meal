@@ -1,0 +1,20 @@
+#eureka注册中心(服务器) 端口号
+server:
+  port: 8899
+
+eureka:
+  instance:
+    hostname: localhost      #主机名称
+    lease-renewal-interval-in-seconds: 1  #客户端发给服务端的心跳频率
+    lease-expiration-duration-in-seconds: 10  #服务端超过几秒没有收到就自动移除
+
+  client:
+    registerWithEureka: false   #eureka服务器不需要自己给自己注册
+    fetchRegistry: false
+    defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+      #开启自我保护模式（开启状态下服务停掉eureka不会立即清除掉宕掉的服务，所以false）
+    enable-self-preservation: false
+      #清理无效节点,默认60*1000毫秒,即60秒
+    eviction-interval-timer-in-ms: 5000
+      # 关闭自我保护功能
